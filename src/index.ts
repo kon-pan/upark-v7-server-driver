@@ -25,6 +25,22 @@ import localAuth from './utils/passport/passport.local';
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 4000;
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type'
+  );
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  next();
+});
+
 const io = new Server(server, {
   cors: {
     origin: [process.env.CLIENT_HOSTNAME],
