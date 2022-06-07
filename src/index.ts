@@ -25,7 +25,6 @@ import localAuth from './utils/passport/passport.local';
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 4000;
-app.options('*', cors())
 const io = new Server(server, {
   cors: {
     origin: [process.env.CLIENT_HOSTNAME],
@@ -46,13 +45,7 @@ app.use(
       // bypass the requests with no origin (like curl requests, mobile apps, etc )
       if (!origin) return callback(null, true);
 
-      if (
-        [
-          process.env.CLIENT_HOSTNAME,
-          process.env.CLIENT_ADMIN_HOSTNAME,
-          process.env.CLIENT_INSPECTOR_HOSTNAME,
-        ].indexOf(origin) === -1
-      ) {
+      if ([process.env.CLIENT_HOSTNAME].indexOf(origin) === -1) {
         var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
         return callback(new Error(msg), false);
       }
