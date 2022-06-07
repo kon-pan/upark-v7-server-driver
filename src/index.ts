@@ -25,6 +25,7 @@ import localAuth from './utils/passport/passport.local';
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 4000;
+app.options('*', cors())
 const io = new Server(server, {
   cors: {
     origin: [process.env.CLIENT_HOSTNAME],
