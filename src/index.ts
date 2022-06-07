@@ -40,11 +40,7 @@ app.set('trust proxy', 1);
 app.use(express.json());
 
 app.use(
-  cors({
-    origin: ['https://cool-donut-427a70.netlify.app/'],
-    methods: ['GET', 'POST', 'DELETE'],
-    credentials: true,
-  })
+  cors({})
   // cors({
   //   origin: function (origin, callback) {
   //     // bypass the requests with no origin (like curl requests, mobile apps, etc )
